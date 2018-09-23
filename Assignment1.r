@@ -16,9 +16,9 @@ if (length(args)==0) {
     # Split County into County and State
     uspopulation <- separate(excelData,"C" , c("C", "S"), sep="," )
     # Aggregate population by state
-    uspopulation <- aggregate(uspopulation$P, by=list(state = uspopulation$S), FUN = sum)
+    uspopulation <- aggregate(list(population = uspopulation$P), by=list(state = uspopulation$S), FUN = sum)
     # Order by population desending
-    orderByPopulationData <- uspopulation[order(-uspopulation$x),]
+    orderByPopulationData <- uspopulation[order(-uspopulation$population),]
     # Get Top 10 state with highest population
     getTop10States <- head(orderByPopulationData, 10)
     # Set State population to partoData
