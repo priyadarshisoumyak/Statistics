@@ -11,10 +11,10 @@ if (length(args)==0) {
     # default output file
     print(args[1]);
     # Load excel data into uspopulation
-    uspopulation <- read_excel(args[1])
-    names(uspopulation) <- c("A", "B", "C", "P", "NDM", "DMD", "NIM", "IMD", "NC")
+    excelData <- read_excel(args[1])
+    names(excelData) <- c("A", "B", "C", "P", "NDM", "DMR", "NIM", "IMD", "NC")
     # Split County into County and State
-    uspopulation <- separate(uspopulation,"C" , c("C", "S"), sep="," )
+    uspopulation <- separate(excelData,"C" , c("C", "S"), sep="," )
     # Aggregate population by state
     uspopulation <- aggregate(uspopulation$P, by=list(state = uspopulation$S), FUN = sum)
     # Order by population desending
@@ -29,4 +29,5 @@ if (length(args)==0) {
     pdf(file="Question_1.pdf")
     # Build chart for Top 10 Population By State
     pareto.chart(partoData, main = "Top 10 Population By State")
+    summary(subset(excelData, select = `DMR`))
 }
