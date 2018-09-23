@@ -25,7 +25,8 @@ if (length(args)==0) {
     partoData <- getTop10States$x
     # Update names of partoData
     names(partoData) <- getTop10States$state
-    # Build chart
+    # Save File as Question_1.pdf
     pdf(file="Question_1.pdf")
+    # Build chart for Top 10 Population By State
     pareto.chart(partoData, main = "Top 10 Population By State")
 }
